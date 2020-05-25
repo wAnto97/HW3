@@ -59,17 +59,17 @@ class DANN_AlexNet(nn.Module):
         )
 
     def forward(self, x, alpha=None):
-        features = self.features
+        features = self.features(x)
         # Flatten the features:
-        # features = features.view(features.size(0), -1)
+        features = features.view(features.size(0), -1)
         # If we pass alpha, we can assume we are training the discriminator
         if alpha is not None:
             # gradient reversal layer (backward gradients will be reversed)
-            reverse_feature = ReverseLayerF.apply(features, alpha)
-            discriminator_output = self.domain_classifier(reverse_feature(x))
+            reverse_features = ReverseLayerF.apply(features, alpha)
+            discriminator_output = self.domain_classifier(reverse_features)
             return discriminator_output
         # If we don't pass alpha, we assume we are training with supervision
         else:
             # do something else
-            class_outputs = self.classifier(features(x))
+            class_outputs = self.classifier(features)
             return class_outputs
