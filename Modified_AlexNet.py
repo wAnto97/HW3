@@ -20,7 +20,7 @@ class ReverseLayerF(Function):
 
 class DANN_AlexNet(nn.Module):
     def __init__(self,num_classes = 100,pretrained=False):
-        super(DANN_AlexNet).__init__()
+        super(DANN_AlexNet,self).__init__()
 
         self.features_exractor = nn.Sequential(
             nn.Conv2d(3, 64, kernel_size=11, stride=4, padding=2),
@@ -74,11 +74,11 @@ class DANN_AlexNet(nn.Module):
             class_outputs = self.class_classifier(self.features_exractor(x))
             return class_outputs
 
-        def dann_alexnet(pretrained=False,num_classes=100):
-            model = DANN_AlexNet(num_classes)
+    def dann_alexnet(pretrained=False,num_classes=100):
+        model = DANN_AlexNet(num_classes)
 
-            if pretrained:
-                state_dict = load_state_dict_from_url('https://download.pytorch.org/models/alexnet-owt-4df8aa71.pth',progress=progress,strict = False)
-                model.load_state_dict(state_dict)
+        if pretrained:
+            state_dict = load_state_dict_from_url('https://download.pytorch.org/models/alexnet-owt-4df8aa71.pth',progress=progress,strict = False)
+            model.load_state_dict(state_dict)
 
-            return model
+        return model
