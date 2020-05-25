@@ -59,7 +59,7 @@ class DANN_AlexNet(nn.Module):
         )
 
     def forward(self, x, alpha=None):
-        features = self.features_exractor
+        features = self.features
         # Flatten the features:
         features = features.view(features.size(0), -1)
         # If we pass alpha, we can assume we are training the discriminator
@@ -71,5 +71,5 @@ class DANN_AlexNet(nn.Module):
         # If we don't pass alpha, we assume we are training with supervision
         else:
             # do something else
-            class_outputs = self.classifier(self.features_exractor(x))
+            class_outputs = self.classifier(features(x))
             return class_outputs
