@@ -61,7 +61,7 @@ class DANN_AlexNet(nn.Module):
     def forward(self, x, alpha=None):
         features = self.features
         # Flatten the features:
-        features = features.view(features.size(0), -1)
+        # features = features.view(features.size(0), -1)
         # If we pass alpha, we can assume we are training the discriminator
         if alpha is not None:
             # gradient reversal layer (backward gradients will be reversed)
