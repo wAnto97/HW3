@@ -5,9 +5,9 @@ from torch.utils.data import Subset
 
 
 class PACS():
-    def __init__(self,root,transform,type='photo'):
+    def __init__(self,root,transform,data='photo'):
         
-        self.sourceData = datasets.ImageFolder(root = './HW3/PACS/photo',transform=transform)
+        self.sourceData = datasets.ImageFolder(root = root + '/' + data,transform=transform)
         self.train_indexes,self.val_indexes = train_test_split([i for i,(img,target) in enumerate(self.sourceData)],test_size=0.2,\
              stratify = self.sourceData.targets,random_state=41)
 
