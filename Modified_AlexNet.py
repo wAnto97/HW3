@@ -20,7 +20,7 @@ class ReverseLayerF(Function):
 
 class DANN_AlexNet(nn.Module):
     def __init__(self,num_classes = 100,pretrained=False):
-        super(DANN_AlexNet,self).__init__()
+        super(nn.Module,self).__init__()
 
         self.features_exractor = nn.Sequential(
             nn.Conv2d(3, 64, kernel_size=11, stride=4, padding=2),
