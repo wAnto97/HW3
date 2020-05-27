@@ -16,4 +16,4 @@ class PACS():
         return Subset(self.sourceData,self.train_indexes),Subset(self.sourceData,self.val_indexes)
     
     def get_train_dataset(self):
-        return Subset(self.sourceData,np.concat((self.train_indexes,self.val_indexes)))
+        return Subset(self.sourceData,np.concatenate((self.train_indexes,self.val_indexes)))
